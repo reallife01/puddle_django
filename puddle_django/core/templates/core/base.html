@@ -13,11 +13,16 @@
         <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-300">
             <a href="/" class="text-xl font-semibold">Puddle</a>
             <div class="space-x-6">
-                <a href="#" class="text-lg font-semibold hover:text-gray-400">New item</a>
-                <a href="#" class="text-lg font-semibold hover:text-gray-400">Browse</a>
+                <a href="{% url 'item:new' %}" class="text-lg font-semibold hover:text-gray-700">New item</a>
+                <a href="{% url 'item:items' %}" class="text-lg font-semibold hover:text-gray-300">Browse</a>
 
-                <a href="#" class="px-6 py-3 text-lg font-semibold bg-teal-600 text-white rounded-xl hover:bg-teal-800 ">Sign up</a>
-                <a href="#" class="px-6 py-3 text-lg font-semibold bg-gray-600 text-white rounded-xl hover:bg-gray-800 ">Log in</a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'conversation:inbox' %}" class="px-6 py-3 text-lg font-semibold bg-teal-600 text-white rounded-xl hover:bg-teal-500">Inbox</a>
+                    <a href="{% url 'dashboard:index' %}" class="px-6 py-3 text-lg font-semibold bg-gray-600 text-white rounded-xl hover:bg-gray-500">Dashboard</a>
+                {% else %}
+                    <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg font-semibold bg-teal-400 text-white rounded-xl hover:bg-teal-600">Sign up</a>
+                    <a href="{% url 'core:login' %}" class="px-6 py-3 text-lg font-semibold bg-gray-400 text-white rounded-xl hover:bg-gray-900">Log in</a>
+                {% endif %}
             </div>
         </nav>
 
@@ -36,7 +41,7 @@
 
                 <ul class="space-y-2">
                     <li><a href="#" class="text-lg text-teal-400 hover:text-teal-800">About</a></li>
-                    <li><a href="{% url 'contact' %}" class="text-lg text-teal-400 hover:text-teal-800">Contact</a></li>
+                    <li><a href="{% url 'core:contact' %}" class="text-lg text-teal-400 hover:text-teal-800">Contact</a></li>
                     <li><a href="#" class="text-lg text-teal-400 hover:text-teal-800">Privacy policy</a></li>
                     <li><a href="#" class="text-lg text-teal-400 hover:text-teal-800">Term of use</a></li>
                 </ul>
